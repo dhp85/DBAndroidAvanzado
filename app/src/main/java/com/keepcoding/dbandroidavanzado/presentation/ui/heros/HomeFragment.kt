@@ -36,8 +36,8 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getSuperHeros()
 
-            viewModel.state.collect {
-                adapter.updateList(it)
+            viewModel.state.collect { heros ->
+                adapter.updateList(heros)
             }
         }
 

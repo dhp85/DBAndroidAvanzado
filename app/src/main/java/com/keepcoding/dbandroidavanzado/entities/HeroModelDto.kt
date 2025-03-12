@@ -8,5 +8,15 @@ data class HeroModelDto(
   @Json (name = "photo")val photo: String,
   @Json (name = "favorite")val favorite: Boolean,
   @Json (name = "description")val description: String
-)
+) {
+  fun toHeroModel(): HeroModel {
+    return HeroModel(
+      id = id,
+      name = name,
+      photo = photo,
+      favorite = favorite,
+      description = description
+    )
+  }
+}
 
