@@ -39,7 +39,13 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.android.material:material:1.11.0")
+    implementation(libs.coil)
+    implementation (libs.material.v1110)
+    implementation(libs.retrofit)
+    implementation(libs.squareup.moshi.kotlin)
+    implementation(libs.converter.moshi)
+    implementation(libs.squareup.moshi.kotlin)
+    implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
