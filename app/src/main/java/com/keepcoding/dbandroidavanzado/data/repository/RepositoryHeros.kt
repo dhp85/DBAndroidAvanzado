@@ -3,7 +3,6 @@ package com.keepcoding.dbandroidavanzado.data.repository
 import android.content.Context
 import android.util.Log
 import com.keepcoding.dbandroidavanzado.data.Network.NetworkHeros
-import com.keepcoding.dbandroidavanzado.data.Network.tools.toLocal
 import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
 import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
 
@@ -24,7 +23,7 @@ class RepositoryHeros {
             val remoteHeros = networkHeros.getHeros()
 
             Log.d("RepositoryHeros", "remoteHeros: $remoteHeros")
-            localDataHeros.insertAll(remoteHeros.map { it.toLocal() })
+            localDataHeros.insertAll(remoteHeros.map { it.toHeroModelLocal()})
             return remoteHeros
         }
         return localHeros.map { it.toHeroModel() }
