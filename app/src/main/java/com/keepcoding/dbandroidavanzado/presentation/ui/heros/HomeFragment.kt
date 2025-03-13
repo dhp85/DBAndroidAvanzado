@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.keepcoding.dbandroidavanzado.databinding.FragmentHomeBinding
+import com.keepcoding.dbandroidavanzado.presentation.ui.heros.model.HomeState
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -29,15 +30,29 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        viewModel.init(requireContext())
+
         val adapter = HomeAdapter()
 
         binding.heroList.adapter = adapter
+        viewModel.getSuperHeros()
 
         lifecycleScope.launch {
-            viewModel.getSuperHeros()
 
-            viewModel.state.collect { heros ->
-                adapter.updateList(heros)
+            viewModel.state.collect { state ->
+                when (state) {
+                    is HomeState.Loading -> {
+                        loadingSettings()
+                    }
+                    is HomeState.Success -> {
+
+                        adapter.updateList(state.heros)
+                    }
+                    is HomeState.Error -> {
+                        // Mostrar mensaje de error
+                    }
+
+                }
             }
         }
 
@@ -47,5 +62,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun loadingSettings() {
+
     }
 }

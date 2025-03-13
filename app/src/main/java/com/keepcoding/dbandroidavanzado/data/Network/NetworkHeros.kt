@@ -1,6 +1,6 @@
-package com.keepcoding.dbandroidavanzado.data
+package com.keepcoding.dbandroidavanzado.data.Network
 
-import com.keepcoding.dbandroidavanzado.data.model.GetHerosRequest
+import com.keepcoding.dbandroidavanzado.data.Network.model.GetHerosRequest
 import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

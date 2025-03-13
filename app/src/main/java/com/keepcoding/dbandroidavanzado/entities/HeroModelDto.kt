@@ -1,5 +1,6 @@
 package com.keepcoding.dbandroidavanzado.entities
 
+import com.keepcoding.dbandroidavanzado.data.local.HeroModelLocal
 import com.squareup.moshi.Json
 
 data class HeroModelDto(
@@ -11,6 +12,16 @@ data class HeroModelDto(
 ) {
   fun toHeroModel(): HeroModel {
     return HeroModel(
+      id = id,
+      name = name,
+      photo = photo,
+      favorite = favorite,
+      description = description
+    )
+  }
+
+  fun toHeroModelLocal(): HeroModelLocal {
+    return HeroModelLocal(
       id = id,
       name = name,
       photo = photo,
