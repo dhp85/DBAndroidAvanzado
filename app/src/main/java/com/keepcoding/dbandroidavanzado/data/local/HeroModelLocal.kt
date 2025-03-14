@@ -15,7 +15,7 @@ data class HeroModelLocal(
     @ColumnInfo(name = "favorite")val favorite: Boolean
 
 ){
-    fun toHeroModel(): HeroModelDto {
+    fun toHeroModelDto(): HeroModelDto {
         return HeroModelDto(
             id = id,
             name = name,

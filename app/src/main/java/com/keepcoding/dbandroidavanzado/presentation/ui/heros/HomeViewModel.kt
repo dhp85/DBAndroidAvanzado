@@ -6,17 +6,20 @@ import androidx.lifecycle.viewModelScope
 import com.keepcoding.dbandroidavanzado.data.repository.RepositoryHeros
 import com.keepcoding.dbandroidavanzado.entities.HeroModel
 import com.keepcoding.dbandroidavanzado.presentation.ui.heros.model.HomeState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: RepositoryHeros) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
     val state: StateFlow<HomeState> = _state.asStateFlow()
 
-    private val repository = RepositoryHeros()
 
     fun init(context: Context) {
         repository.init(context)

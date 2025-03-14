@@ -5,12 +5,12 @@ import android.util.Log
 import com.keepcoding.dbandroidavanzado.data.Network.NetworkHeros
 import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
 import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
+import javax.inject.Inject
 
-class RepositoryHeros {
+class RepositoryHeros @Inject constructor(
+    private val networkHeros: NetworkHeros,
+    private val localDataHeros: LocalDataSource) {
 
-    private val networkHeros = NetworkHeros()
-
-    private val localDataHeros: LocalDataSource = LocalDataSource()
 
     fun init(context: Context) {
         localDataHeros.init(context)
@@ -26,7 +26,7 @@ class RepositoryHeros {
             localDataHeros.insertAll(remoteHeros.map { it.toHeroModelLocal()})
             return remoteHeros
         }
-        return localHeros.map { it.toHeroModel() }
+        return localHeros.map { it.toHeroModelDto() }
     }
 
 

@@ -3,25 +3,22 @@ package com.keepcoding.dbandroidavanzado.data.local
 import android.content.Context
 import androidx.room.Room
 import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
+import javax.inject.Inject
 
-class LocalDataSource {
-
-    private lateinit var db: HeroDataBase
+class LocalDataSource @Inject constructor(
+    private val dao: HeroDao
+) {
 
     fun init(context: Context){
-        db = Room.databaseBuilder(
-            context,
-            HeroDataBase::class.java, "database-name"
 
-        ).build()
     }
 
     suspend fun getAllHeros(): List<HeroModelLocal> {
-        return db.heroDao().getAllHeros()
+        return dao.getAllHeros()
     }
 
     suspend fun insertAll(heros: List<HeroModelLocal>) {
-        db.heroDao().insertAll(heros)
+        dao.insertAll(heros)
 
     }
 
