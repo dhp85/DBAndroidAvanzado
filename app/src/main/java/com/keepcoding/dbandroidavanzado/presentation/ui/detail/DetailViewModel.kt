@@ -1,4 +1,4 @@
-package com.keepcoding.dbandroidavanzado.presentation.ui.heros
+package com.keepcoding.dbandroidavanzado.presentation.ui.detail
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -14,26 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class DetailViewModel @Inject constructor(
     private val repository: RepositoryHeros) : ViewModel() {
 
-    private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
-    val state: StateFlow<HomeState> = _state.asStateFlow()
-
-
-    fun init(context: Context) {
-        repository.init(context)
-    }
-
-
-    fun getSuperHeros() {
-        viewModelScope.launch {
-            _state.value = HomeState.Loading
-            val superHeros = repository.getHeros().map { it.toHeroModel() }
-
-            _state.value = HomeState.Success(superHeros)
-
-        }
-    }
 
 }

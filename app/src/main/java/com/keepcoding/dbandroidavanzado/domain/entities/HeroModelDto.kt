@@ -1,4 +1,4 @@
-package com.keepcoding.dbandroidavanzado.entities
+package com.keepcoding.dbandroidavanzado.domain.entities
 
 import com.keepcoding.dbandroidavanzado.data.local.HeroModelLocal
 import com.squareup.moshi.Json

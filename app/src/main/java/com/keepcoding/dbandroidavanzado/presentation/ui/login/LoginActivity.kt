@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         setObeservers()
+        supportActionBar?.hide() // Oculta la barra de acción
 
         binding.loginButton.setOnClickListener {
            val user = binding.EditTextUser.text.toString()

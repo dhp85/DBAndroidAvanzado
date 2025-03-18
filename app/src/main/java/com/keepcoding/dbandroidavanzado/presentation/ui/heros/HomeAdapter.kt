@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.keepcoding.dbandroidavanzado.R
-import com.keepcoding.dbandroidavanzado.entities.HeroModel
+import com.keepcoding.dbandroidavanzado.domain.entities.HeroModel
 
-class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(private val onClickListener: (HeroModel) -> Unit): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     private var heroList = mutableListOf<HeroModel>()
 
@@ -20,11 +20,20 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
         notifyItemRangeInserted(originalSize, list.size)
     }
 
-    class HomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class HomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textViewHero = itemView.findViewById<TextView>(R.id.hero_name)
         private val imageViewHero = itemView.findViewById<ImageView>(R.id.photo)
 
+        private lateinit var hero: HeroModel
+
+        init {
+            itemView.setOnClickListener{
+                onClickListener(hero)
+            }
+        }
+
         fun bind(hero: HeroModel) {
+            this.hero = hero
             textViewHero.text = hero.name
             imageViewHero.load(hero.photo)
         }

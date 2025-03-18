@@ -1,4 +1,4 @@
-package com.keepcoding.dbandroidavanzado.entities
+package com.keepcoding.dbandroidavanzado.domain.entities
 
 class HeroModel (
     val id: String,

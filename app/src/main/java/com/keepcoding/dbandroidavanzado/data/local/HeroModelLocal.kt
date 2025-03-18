@@ -3,7 +3,7 @@ package com.keepcoding.dbandroidavanzado.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
+import com.keepcoding.dbandroidavanzado.domain.entities.HeroModelDto
 
 
 @Entity(tableName = "heros")

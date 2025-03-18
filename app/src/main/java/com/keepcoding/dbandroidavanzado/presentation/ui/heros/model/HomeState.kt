@@ -1,6 +1,6 @@
 package com.keepcoding.dbandroidavanzado.presentation.ui.heros.model
 
-import com.keepcoding.dbandroidavanzado.entities.HeroModel
+import com.keepcoding.dbandroidavanzado.domain.entities.HeroModel
 
 sealed class HomeState{
     data object Loading: HomeState()

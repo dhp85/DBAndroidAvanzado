@@ -2,7 +2,7 @@ package com.keepcoding.dbandroidavanzado.data.local
 
 import android.content.Context
 import androidx.room.Room
-import com.keepcoding.dbandroidavanzado.entities.HeroModelDto
+import com.keepcoding.dbandroidavanzado.domain.entities.HeroModelDto
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
