@@ -17,6 +17,10 @@ class CredentialsProvider @Inject constructor() {
 
     fun setToken(token: String) {
         this.token = token
+    }
+
+    fun getToken(): String {
+        return token
 
     }
 

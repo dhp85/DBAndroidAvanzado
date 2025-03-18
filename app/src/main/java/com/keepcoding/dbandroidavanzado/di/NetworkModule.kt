@@ -49,11 +49,12 @@ object NetworkModule {
 
     @Provides
     @BearerClient
-    fun provideBearerOkHttpClient(): OkHttpClient {
+    fun provideBearerOkHttpClient(credentialsProvider: CredentialsProvider): OkHttpClient {
+        val token = credentialsProvider.getToken()
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer eyJraWQiOiJwcml2YXRlIiwiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6ImRpZWdvaHA4NUBnbWFpbC5jb20iLCJleHBpcmF0aW9uIjo2NDA5MjIxMTIwMCwiaWRlbnRpZnkiOiJGQkY5QkUzRi02QzgwLTQ2MUItOUFFMC1DMDUxOUI0OEYxRjcifQ.fllqJ0Q0KL3yQAppQwTR64KuFh_HyIZDLOXtvx8kGzM")
+                    .addHeader("Authorization", "Bearer $token")
                     .build()
                chain.proceed(request)
             }
@@ -70,7 +71,6 @@ object NetworkModule {
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
 
-                // Verifica si hay credenciales antes de agregarlas al header
                 if (credentialsProvider.username.isNotEmpty() && credentialsProvider.password.isNotEmpty()) {
                     val base64Credentials = Credentials.basic(credentialsProvider.username, credentialsProvider.password)
                     requestBuilder.addHeader("Authorization", base64Credentials)
@@ -108,7 +108,7 @@ object NetworkModule {
     @Singleton
     @Provides
     @BasicAuthRetrofit
-    fun provideBasicRetrofit(@BasicAuthClient OkHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
+    fun provideBasicRetrofit(@BasicAuthClient OkHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://dragonball.keepcoding.education/")
             .client(OkHttpClient)
@@ -128,5 +128,4 @@ object NetworkModule {
         return retrofit.create(LoginApi::class.java)
 
     }
-
 }

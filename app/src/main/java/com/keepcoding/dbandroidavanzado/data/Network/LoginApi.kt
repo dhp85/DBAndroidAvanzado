@@ -1,7 +1,6 @@
 package com.keepcoding.dbandroidavanzado.data.Network
 
 
-import com.keepcoding.dbandroidavanzado.data.Network.model.LoginRequest
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.Headers

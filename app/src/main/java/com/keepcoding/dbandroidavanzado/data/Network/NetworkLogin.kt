@@ -1,7 +1,6 @@
 package com.keepcoding.dbandroidavanzado.data.Network
 
 import com.keepcoding.dbandroidavanzado.data.Network.model.CredentialsProvider
-import com.keepcoding.dbandroidavanzado.data.Network.model.LoginRequest
 import javax.inject.Inject
 
 class NetworkLogin @Inject constructor(
