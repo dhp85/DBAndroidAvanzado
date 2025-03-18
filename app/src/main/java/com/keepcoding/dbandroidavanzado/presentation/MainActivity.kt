@@ -1,5 +1,7 @@
 package com.keepcoding.dbandroidavanzado.presentation
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,10 +11,20 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.keepcoding.dbandroidavanzado.R
 import com.keepcoding.dbandroidavanzado.databinding.ActivityMainBinding
+import com.keepcoding.dbandroidavanzado.presentation.ui.heros.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+
+
+        fun startActivity(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
 
     private lateinit var binding: ActivityMainBinding
 
