@@ -25,7 +25,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-       viewModel.getHero(args.heroName)
+       viewModel.getHero(args.heroName, args.idHero)
 
         viewModel.hero.observe(viewLifecycleOwner, Observer { hero ->
             for (item in hero) {
@@ -33,7 +33,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 binding.heroImageDetail.load(item.photo)
                 binding.tvDetail.text = item.name
                 binding.tvDescription.text = item.description
+
             }
+            viewModel.locations.observe(viewLifecycleOwner, Observer { locations ->
+                for (item in locations) {
+                    binding.tvCountry.text = item.longitud
+                    binding.tvLatitud.text = item.latitud
+                }
+            })
         })
 
     }

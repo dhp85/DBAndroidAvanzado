@@ -1,4 +1,4 @@
-package com.keepcoding.dbandroidavanzado.data.Network
+package com.keepcoding.dbandroidavanzado.data.Network.networkapi
 
 import com.keepcoding.dbandroidavanzado.data.Network.model.GetHerosRequest
 import com.keepcoding.dbandroidavanzado.domain.entities.HeroModelDto

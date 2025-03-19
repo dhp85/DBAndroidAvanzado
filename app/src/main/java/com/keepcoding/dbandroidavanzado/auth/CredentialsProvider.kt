@@ -1,4 +1,4 @@
-package com.keepcoding.dbandroidavanzado.data.Network.model
+package com.keepcoding.dbandroidavanzado.auth
 
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,7 +1,6 @@
 package com.keepcoding.dbandroidavanzado.data.repository
 
-import com.keepcoding.dbandroidavanzado.data.Network.NetworkLogin
-import com.keepcoding.dbandroidavanzado.data.Network.model.CredentialsProvider
+import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkLogin
 import javax.inject.Inject
 
 class RepositoryLogin @Inject constructor(

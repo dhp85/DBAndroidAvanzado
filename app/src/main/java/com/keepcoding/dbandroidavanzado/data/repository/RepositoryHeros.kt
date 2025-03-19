@@ -2,11 +2,9 @@ package com.keepcoding.dbandroidavanzado.data.repository
 
 import android.content.Context
 import android.util.Log
-import com.keepcoding.dbandroidavanzado.data.Network.NetworkHeros
+import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkHeros
 import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
-import com.keepcoding.dbandroidavanzado.di.BearerClient
 import com.keepcoding.dbandroidavanzado.domain.entities.HeroModelDto
-import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 class RepositoryHeros @Inject constructor(

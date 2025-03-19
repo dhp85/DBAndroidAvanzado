@@ -20,6 +20,10 @@
                 android:name="hero_name"
                 app:argType="string" />
 
+            <argument
+                android:name="id_hero"
+                app:argType="string" />
+
 
         </action>
 
@@ -39,6 +43,10 @@
 
         <argument
             android:name="hero_name"
+            app:argType="string" />
+
+        <argument
+            android:name="id_hero"
             app:argType="string" />
 
     </fragment>

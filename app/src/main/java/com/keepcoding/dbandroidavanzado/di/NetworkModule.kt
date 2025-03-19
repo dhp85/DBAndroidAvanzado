@@ -1,10 +1,11 @@
 package com.keepcoding.dbandroidavanzado.di
 
 import android.util.Log
-import com.keepcoding.dbandroidavanzado.data.Network.DetailApi
-import com.keepcoding.dbandroidavanzado.data.Network.HerosApi
-import com.keepcoding.dbandroidavanzado.data.Network.LoginApi
-import com.keepcoding.dbandroidavanzado.data.Network.model.CredentialsProvider
+import com.keepcoding.dbandroidavanzado.data.Network.networkapi.DetailApi
+import com.keepcoding.dbandroidavanzado.data.Network.networkapi.HerosApi
+import com.keepcoding.dbandroidavanzado.data.Network.networkapi.LoginApi
+import com.keepcoding.dbandroidavanzado.auth.CredentialsProvider
+import com.keepcoding.dbandroidavanzado.data.Network.networkapi.LocationApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -131,8 +132,13 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideDetail(@BearerRetrofit retrofit: Retrofit): DetailApi{
+    fun provideDetail(@BearerRetrofit retrofit: Retrofit): DetailApi {
         return retrofit.create(DetailApi::class.java)
 
+    }
+
+    @Provides
+    fun provideLocation(@BearerRetrofit retrofit: Retrofit): LocationApi {
+        return retrofit.create(LocationApi::class.java)
     }
 }
