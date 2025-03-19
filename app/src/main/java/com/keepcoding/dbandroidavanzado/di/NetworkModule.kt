@@ -1,6 +1,7 @@
 package com.keepcoding.dbandroidavanzado.di
 
 import android.util.Log
+import com.keepcoding.dbandroidavanzado.data.Network.DetailApi
 import com.keepcoding.dbandroidavanzado.data.Network.HerosApi
 import com.keepcoding.dbandroidavanzado.data.Network.LoginApi
 import com.keepcoding.dbandroidavanzado.data.Network.model.CredentialsProvider
@@ -71,10 +72,10 @@ object NetworkModule {
             .addInterceptor { chain ->
                 val requestBuilder = chain.request().newBuilder()
 
-                if (credentialsProvider.username.isNotEmpty() && credentialsProvider.password.isNotEmpty()) {
-                    val base64Credentials = Credentials.basic(credentialsProvider.username, credentialsProvider.password)
-                    requestBuilder.addHeader("Authorization", base64Credentials)
-                }
+
+                val base64Credentials = Credentials.basic(credentialsProvider.username, credentialsProvider.password)
+                requestBuilder.addHeader("Authorization", base64Credentials)
+
 
                 val response = chain.proceed(requestBuilder.build())
 
@@ -112,7 +113,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl("https://dragonball.keepcoding.education/")
             .client(OkHttpClient)
-            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create()) //maneja texto plano, en este caso el token
             .build()
     }
 
@@ -126,6 +127,12 @@ object NetworkModule {
     @Provides
     fun provideLoginApi(@BasicAuthRetrofit retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
+
+    }
+
+    @Provides
+    fun provideDetail(@BearerRetrofit retrofit: Retrofit): DetailApi{
+        return retrofit.create(DetailApi::class.java)
 
     }
 }

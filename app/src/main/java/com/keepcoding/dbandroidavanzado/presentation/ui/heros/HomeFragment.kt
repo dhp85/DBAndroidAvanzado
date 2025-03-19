@@ -37,7 +37,8 @@ class HomeFragment : Fragment() {
         viewModel.init(requireContext())
 
         val adapter = HomeAdapter{
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_detail)
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(it.name)
+            findNavController().navigate(action)
         }
 
         binding.heroList.adapter = adapter

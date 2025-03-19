@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-
         fun startActivity(context: Context) {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
@@ -34,13 +33,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide() // Oculta la barra de acción
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_notifications

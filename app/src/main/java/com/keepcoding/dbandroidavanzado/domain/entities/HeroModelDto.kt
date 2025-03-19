@@ -31,5 +31,6 @@ data class HeroModelDto(
       description = description
     )
   }
+
 }
 

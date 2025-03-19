@@ -8,10 +8,12 @@ import androidx.room.Query
 @Dao
 interface HeroDao {
 
+
     @Query("SELECT * FROM heros")
     suspend fun getAllHeros(): List<HeroModelLocal>
 
     @Insert
     suspend fun insertAll(heros: List<HeroModelLocal>)
+
 
 }

@@ -13,7 +13,15 @@
 
         <action
             android:id="@+id/action_navigation_home_to_navigation_detail"
-            app:destination="@id/navigation_detail" />
+            app:destination="@id/navigation_detail">
+
+
+            <argument
+                android:name="hero_name"
+                app:argType="string" />
+
+
+        </action>
 
     </fragment>
 
@@ -27,5 +35,11 @@
         android:id="@+id/navigation_detail"
         android:name="com.keepcoding.dbandroidavanzado.presentation.ui.detail.DetailFragment"
         android:label="@string/title_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+
+        <argument
+            android:name="hero_name"
+            app:argType="string" />
+
+    </fragment>
 </navigation>
