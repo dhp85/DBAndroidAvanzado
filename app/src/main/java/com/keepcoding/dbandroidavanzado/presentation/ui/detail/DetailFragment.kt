@@ -25,7 +25,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-       viewModel.getHero(args.heroName, args.idHero)
+       viewModel.getHero(args.heroName)
+        viewModel.getLocations(args.idHero)
 
         viewModel.hero.observe(viewLifecycleOwner, Observer { hero ->
             for (item in hero) {

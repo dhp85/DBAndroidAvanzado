@@ -35,23 +35,35 @@ class DetailViewModel @Inject constructor(
     private val _locations = MutableLiveData<List<LocationModel>>()
     val locations: LiveData<List<LocationModel>> get() = _locations
 
-    fun getHero(name: String, id: String) {
+
+    fun getHero(name: String) {
         _uiState.value = DetailState.Loading
         viewModelScope.launch {
             try {
-                val getHero = async (Dispatchers.IO){
-                    val dataHero =  repository.getHero(name).map { it.toHeroModel() }
+                val heroResult = async(Dispatchers.IO) {
+                    val dataHero = repository.getHero(name).map { it.toHeroModel() }
                     _hero.postValue(dataHero)
                 }
-                val getLocations = async (Dispatchers.IO){
+                heroResult.await()
+                _uiState.value = DetailState.Success
+            } catch (e: Exception) {
+                _uiState.value = DetailState.Error(e.message ?: "Error desconocido")
+            }
+        }
+    }
+
+    fun getLocations(id: String) {
+        _uiState.value = DetailState.Loading
+        viewModelScope.launch {
+            try {
+                val locationsResult = async(Dispatchers.IO) {
                     val dataLocations = repositoryLocations.getLocations(id).map { it.toLocationModel() }
                     _locations.postValue(dataLocations)
                 }
-                getHero.await()
-                getLocations.await()
+                locationsResult.await()
                 _uiState.value = DetailState.Success
             } catch (e: Exception) {
-            _uiState.value = DetailState.Error(e.message ?: "Error desconocido")
+                _uiState.value = DetailState.Error(e.message ?: "Error desconocido")
             }
         }
     }

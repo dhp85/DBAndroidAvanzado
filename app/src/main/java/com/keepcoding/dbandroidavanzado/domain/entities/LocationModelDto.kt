@@ -1,11 +1,13 @@
 package com.keepcoding.dbandroidavanzado.domain.entities
 
+import com.squareup.moshi.Json
+
 data class LocationModelDto(
-    val dateShow: String,
-    val id: String,
-    val hero: Hero,
-    val longitud: String,
-    val latitud: String
+    @Json(name = "dateShow")val dateShow: String,
+    @Json(name = "id")val id: String,
+    @Json(name = "hero")val hero: Hero,
+    @Json(name = "longitud")val longitud: String,
+    @Json(name = "latitud")val latitud: String
 ){
     fun toLocationModel(): LocationModel {
         return LocationModel(
@@ -17,6 +19,6 @@ data class LocationModelDto(
 }
 
 data class Hero (
-    val id: String
+   @Json(name = "id") val id: String
 )
 
