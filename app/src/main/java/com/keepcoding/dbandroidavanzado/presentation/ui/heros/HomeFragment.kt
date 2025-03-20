@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.keepcoding.dbandroidavanzado.R
 import com.keepcoding.dbandroidavanzado.databinding.FragmentHomeBinding
 import com.keepcoding.dbandroidavanzado.presentation.ui.heros.model.HomeState
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,16 +47,12 @@ class HomeFragment : Fragment() {
 
             viewModel.state.collect { state ->
                 when (state) {
-                    is HomeState.Loading -> {
-                        loadingSettings()
-                    }
+                    is HomeState.Loading -> loadingSettingsView()
                     is HomeState.Success -> {
-
                         adapter.updateList(state.heros)
+                        successSettingsView()
                     }
-                    is HomeState.Error -> {
-                        // Mostrar mensaje de error
-                    }
+                    is HomeState.Error -> erroSettingsView()
 
                 }
             }
@@ -71,7 +66,22 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun loadingSettings() {
+    private fun loadingSettingsView() {
+        binding.loading.visibility = View.VISIBLE
+        binding.heroList.visibility = View.GONE
 
+    }
+
+    private fun successSettingsView() {
+        binding.loading.visibility = View.GONE
+        binding.heroList.visibility = View.VISIBLE
+
+    }
+
+    private fun erroSettingsView() {
+        binding.loading.visibility = View.GONE
+        binding.heroList.visibility = View.GONE
+        binding.tvError.visibility = View.VISIBLE
+        binding.tvError.text = "Error in app"
     }
 }

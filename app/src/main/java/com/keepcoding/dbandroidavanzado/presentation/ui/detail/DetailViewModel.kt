@@ -26,7 +26,7 @@ class DetailViewModel @Inject constructor(
     private val repositoryLocations: RepositoryLocations
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<DetailState>(DetailState.Idle)
+    private val _uiState = MutableStateFlow<DetailState>(DetailState.Loading)
     val uiState: StateFlow<DetailState> = _uiState.asStateFlow()
 
     private val _hero = MutableLiveData<List<HeroModel>>()
@@ -37,7 +37,6 @@ class DetailViewModel @Inject constructor(
 
 
     fun getHero(name: String) {
-        _uiState.value = DetailState.Loading
         viewModelScope.launch {
             try {
                 val heroResult = async(Dispatchers.IO) {
