@@ -9,8 +9,7 @@ class NetworkDetail @Inject constructor(
     private val api: DetailApi
 ) {
 
-    suspend fun getHero(name: String): List<HeroModelDto> {
-        return api.getHero(GetHerosRequest(name))
-
+    suspend fun getHero(name: String): Result<List<HeroModelDto>> = runCatching{
+        api.getHero(GetHerosRequest(name))
     }
 }

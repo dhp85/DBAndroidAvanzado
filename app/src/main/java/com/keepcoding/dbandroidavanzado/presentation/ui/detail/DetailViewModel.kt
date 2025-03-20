@@ -38,32 +38,32 @@ class DetailViewModel @Inject constructor(
 
     fun getHero(name: String) {
         viewModelScope.launch {
-            try {
-                val heroResult = async(Dispatchers.IO) {
-                    val dataHero = repository.getHero(name).map { it.toHeroModel() }
-                    _hero.postValue(dataHero)
+            val heroResult = async(Dispatchers.IO) {
+                val dataHero = repository.getHero(name)
+                dataHero.onSuccess { data ->
+                    _hero.postValue(data.map { it.toHeroModel() })
+                }.onFailure { throwable ->
+                    _uiState.value = DetailState.Error(throwable.message ?: "Error app")
                 }
-                heroResult.await()
-                _uiState.value = DetailState.Success
-            } catch (e: Exception) {
-                _uiState.value = DetailState.Error(e.message ?: "Error desconocido")
             }
+            heroResult.await()
+            _uiState.value = DetailState.Success
         }
     }
 
     fun getLocations(id: String) {
         _uiState.value = DetailState.Loading
-        viewModelScope.launch {
-            try {
-                val locationsResult = async(Dispatchers.IO) {
-                    val dataLocations = repositoryLocations.getLocations(id).map { it.toLocationModel() }
-                    _locations.postValue(dataLocations)
-                }
-                locationsResult.await()
-                _uiState.value = DetailState.Success
-            } catch (e: Exception) {
-                _uiState.value = DetailState.Error(e.message ?: "Error desconocido")
+        viewModelScope.launch(Dispatchers.IO) {
+            val locationsResult = async(Dispatchers.IO) {
+                repositoryLocations.getLocations(id)
+                    .onSuccess { data ->
+                        _locations.postValue(data.map { it.toLocationModel() })
+                    }.onFailure { throwable ->
+                        _uiState.value = DetailState.Error(throwable.message ?: "Error app")
+                    }
             }
+            locationsResult.await()
+            _uiState.value = DetailState.Success
         }
     }
 }

@@ -8,10 +8,7 @@ import javax.inject.Inject
 class NetworkHeros @Inject constructor(
     private val api: HerosApi
 ) {
-
-
-    suspend fun getHeros(): List<HeroModelDto> {
-        return api.getHeros(GetHerosRequest()).sortedBy { it.name }
-
+    suspend fun getHeros(): Result<List<HeroModelDto>> = runCatching {
+        api.getHeros(GetHerosRequest()).sortedBy { it.name }
     }
 }

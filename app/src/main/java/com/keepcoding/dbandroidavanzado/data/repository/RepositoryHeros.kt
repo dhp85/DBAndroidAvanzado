@@ -15,21 +15,18 @@ class RepositoryHeros @Inject constructor(
     fun init(context: Context) {
         localDataHeros.init(context)
     }
-
     suspend fun getHeros(): List<HeroModelDto> {
         val localHeros = localDataHeros.getAllHeros()
 
-        if (localHeros.isEmpty()) {
-            val remoteHeros = networkHeros.getHeros()
-
-            Log.d("RepositoryHeros", "remoteHeros: $remoteHeros")
-            localDataHeros.insertAll(remoteHeros.map { it.toHeroModelLocal()})
-            return remoteHeros
+      return if (localHeros.isEmpty()) {
+            networkHeros.getHeros().onSuccess { remoteHeros ->
+                localDataHeros.insertAll(remoteHeros.map { it.toHeroModelLocal() })
+            }.getOrElse { throwable ->
+                Log.e("RepositoryHeros", "Error getting heros from network", throwable)
+                emptyList()
+            }
+        } else {
+            localHeros.map { it.toHeroModelDto() }
         }
-        return localHeros.map { it.toHeroModelDto() }
     }
-
-
-
-
 }

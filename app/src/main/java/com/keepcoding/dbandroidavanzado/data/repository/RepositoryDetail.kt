@@ -9,10 +9,16 @@ class RepositoryDetail@Inject constructor(
     private val networkDetail: NetworkDetail
 ) {
 
-    suspend fun getHero(name: String): List<HeroModelDto> {
+    suspend fun getHero(name: String): Result<List<HeroModelDto>> = runCatching {
 
-            val remoteHero = networkDetail.getHero(name)
-            Log.d("RepositoryHeros", "remoteHeros: $remoteHero")
-            return remoteHero
+        networkDetail.getHero(name)
+            .getOrElse { throwable ->
+                Result.failure<List<HeroModelDto>>(throwable)
+                Log.e(
+                    "RepositoryDetail", "Error getting hero in detail from network",
+                    throwable)
+                throw throwable
+            }
+
     }
 }

@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                         errorSettingsView()
                         Toast.makeText(
                             this@LoginActivity,
-                            "Ha ocurrido un error. ${state.message}",
+                            "Error. \"Incorrect username or password.\"",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -92,5 +92,4 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.visibility = View.VISIBLE
 
     }
-
 }

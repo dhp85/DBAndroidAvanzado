@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.coil)
     implementation (libs.material.v1110)
     implementation(libs.retrofit)
-    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation (libs.converter.scalars)
     implementation(libs.squareup.moshi.kotlin)
     implementation(libs.converter.moshi)
     implementation(libs.squareup.moshi.kotlin)
@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -67,7 +68,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.2.1")
+    testImplementation("com.google.truth:truth:1.0")
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
