@@ -35,8 +35,9 @@ class HomeFragment : Fragment() {
 
         viewModel.init(requireContext())
 
-        val adapter = HomeAdapter{
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(it.name, it.id)
+        val adapter = HomeAdapter {
+            val action =
+                HomeFragmentDirections.actionNavigationHomeToNavigationDetail(it.name, it.id)
             findNavController().navigate(action)
         }
 
@@ -52,6 +53,7 @@ class HomeFragment : Fragment() {
                         adapter.updateList(state.heros)
                         successSettingsView()
                     }
+
                     is HomeState.Error -> erroSettingsView()
 
                 }
@@ -67,21 +69,29 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadingSettingsView() {
-        binding.loading.visibility = View.VISIBLE
-        binding.heroList.visibility = View.GONE
+        with(binding) {
+            loading.visibility = View.VISIBLE
+            heroList.visibility = View.GONE
+        }
+
 
     }
 
     private fun successSettingsView() {
-        binding.loading.visibility = View.GONE
-        binding.heroList.visibility = View.VISIBLE
+        with(binding) {
+            loading.visibility = View.GONE
+            heroList.visibility = View.VISIBLE
+        }
+
 
     }
 
     private fun erroSettingsView() {
-        binding.loading.visibility = View.GONE
-        binding.heroList.visibility = View.GONE
-        binding.tvError.visibility = View.VISIBLE
-        binding.tvError.text = "Error in app"
+        with(binding) {
+            loading.visibility = View.GONE
+            heroList.visibility = View.GONE
+            tvError.visibility = View.VISIBLE
+            tvError.text = "Error in app"
+        }
     }
 }

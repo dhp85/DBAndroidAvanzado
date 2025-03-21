@@ -1,9 +1,9 @@
 package com.keepcoding.dbandroidavanzado.domain.entities
 
-class HeroModel (
+data class HeroModel (
     val id: String,
     val name: String,
     val photo: String,
-    val description: String,
-    val favorite: Boolean
+    val favorite: Boolean,
+    val description: String
 )

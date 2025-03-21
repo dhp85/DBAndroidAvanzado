@@ -1,9 +1,8 @@
-package com.keepcoding.dbandroidavanzado.remote
+package com.keepcoding.dbandroidavanzado.data.remote
 
-import android.net.Network
 import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkHeros
 import com.keepcoding.dbandroidavanzado.data.Network.networkapi.HerosApi
-import com.keepcoding.dbandroidavanzado.mockwebserver.DbDispacher
+import com.keepcoding.dbandroidavanzado.mockwebserver.HerosDispacher
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.runBlocking
@@ -17,20 +16,23 @@ import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class MockWebserverNetwork {
+class MockWebserverNetworkHeros {
 
     // Dependencias
 
     private lateinit var api: HerosApi
     private lateinit var mockWebServer: MockWebServer
+    private lateinit var dispacher: HerosDispacher
 
     // SUT
     private lateinit var network: NetworkHeros
 
     @Before
     fun setUp(){
+        dispacher = HerosDispacher()
+
         mockWebServer = MockWebServer()
-        mockWebServer.dispatcher = DbDispacher()
+        mockWebServer.dispatcher = dispacher
         mockWebServer.start()
 
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -53,7 +55,10 @@ class MockWebserverNetwork {
     @Test
     fun`test return all heros in call Api`() = runBlocking {
 
-        val heros = network.getHeros()
+        dispacher.forceError = false
+
+
+        val heros = network.getHeros().getOrThrow()
 
         assertTrue(heros.isNotEmpty())
         assertTrue(heros.size == 15)
@@ -62,10 +67,23 @@ class MockWebserverNetwork {
 
     }
 
+    @Test(expected = Exception::class)
+    fun `Test return error in call Api`() = runBlocking {
+        // Configurar el dispacher para que devuelva un error
+        dispacher.forceError = true
+
+        // Llamar a la función que queremos probar
+        val heros = network.getHeros().getOrThrow()
+
+        //Assertar el resultado
+
+        assertTrue(heros.isNotEmpty())
+        assertTrue(heros.size == 15)
+
+    }
+
     @After
     fun tearDown(){
         mockWebServer.shutdown()
     }
-
-
 }

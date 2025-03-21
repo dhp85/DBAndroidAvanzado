@@ -57,50 +57,52 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     is DetailState.Error -> erroSettingsView()
 
                 }
-
             }
         }
-
     }
 
     private fun loadingSettingsView() {
-        binding.loadingDetail.visibility = View.VISIBLE
-        binding.heroImageDetail.visibility = View.GONE
-        binding.tvErrorDetail.visibility = View.GONE
-        binding.tvDetail.visibility = View.GONE
-        binding.tvDescription.visibility = View.GONE
-        binding.tvLatitud.visibility = View.GONE
-        binding.tvCountry.visibility = View.GONE
-        binding.buttonFavorite.visibility = View.GONE
-        binding.tvLocalitation.visibility = View.GONE
 
+        with(binding) {
+            loadingDetail.visibility = View.VISIBLE
+            heroImageDetail.visibility = View.GONE
+            tvErrorDetail.visibility = View.GONE
+            tvDetail.visibility = View.GONE
+            tvDescription.visibility = View.GONE
+            tvLatitud.visibility = View.GONE
+            tvCountry.visibility = View.GONE
+            buttonFavorite.visibility = View.GONE
+            tvLocalitation.visibility = View.GONE
+        }
     }
 
     private fun successSettingsView() {
-        binding.loadingDetail.visibility = View.GONE
-        binding.heroImageDetail.visibility = View.VISIBLE
-        binding.tvErrorDetail.visibility = View.VISIBLE
-        binding.tvDetail.visibility = View.VISIBLE
-        binding.tvDescription.visibility = View.VISIBLE
-        binding.tvLatitud.visibility = View.VISIBLE
-        binding.tvCountry.visibility = View.VISIBLE
-        binding.buttonFavorite.visibility = View.VISIBLE
-        binding.tvLocalitation.visibility = View.VISIBLE
-
+        with(binding) {
+            loadingDetail.visibility = View.GONE
+            heroImageDetail.visibility = View.VISIBLE
+            tvErrorDetail.visibility = View.VISIBLE
+            tvDetail.visibility = View.VISIBLE
+            tvDescription.visibility = View.VISIBLE
+            tvLatitud.visibility = View.VISIBLE
+            tvCountry.visibility = View.VISIBLE
+            buttonFavorite.visibility = View.VISIBLE
+            tvLocalitation.visibility = View.VISIBLE
+        }
     }
 
     private fun erroSettingsView() {
-        binding.loadingDetail.visibility = View.GONE
-        binding.heroImageDetail.visibility = View.GONE
-        binding.tvErrorDetail.visibility = View.GONE
-        binding.tvDetail.visibility = View.GONE
-        binding.tvDescription.visibility = View.GONE
-        binding.tvLatitud.visibility = View.GONE
-        binding.tvCountry.visibility = View.GONE
-        binding.buttonFavorite.visibility = View.GONE
-        binding.tvLocalitation.visibility = View.GONE
-        binding.tvErrorDetail.visibility = View.VISIBLE
-        binding.tvErrorDetail.text = "Error in app"
+        with(binding) {
+            loadingDetail.visibility = View.GONE
+            heroImageDetail.visibility = View.GONE
+            tvErrorDetail.visibility = View.GONE
+            tvDetail.visibility = View.GONE
+            tvDescription.visibility = View.GONE
+            tvLatitud.visibility = View.GONE
+            tvCountry.visibility = View.GONE
+            buttonFavorite.visibility = View.GONE
+            tvLocalitation.visibility = View.GONE
+            tvErrorDetail.visibility = View.VISIBLE
+            tvErrorDetail.text = "Error in app"
+        }
     }
-
 }

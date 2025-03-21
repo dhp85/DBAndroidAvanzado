@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
                     is LoginState.Success -> {
                         successSettingsView()
                         startActivity()
-
                     }
 
                     is LoginState.Error -> {
@@ -76,20 +75,24 @@ class LoginActivity : AppCompatActivity() {
     // Funciones para cambiar la vista según el estado.
 
     private fun loadingSettingsView() {
-        binding.spinningLoading.visibility = View.VISIBLE
-        binding.loginButton.visibility = View.GONE
+        with(binding) {
+            spinningLoading.visibility = View.VISIBLE
+            loginButton.visibility = View.GONE
+        }
     }
 
 
     private fun successSettingsView() {
-        binding.spinningLoading.visibility = View.GONE
-        binding.loginButton.visibility = View.GONE
-
+        with(binding) {
+            spinningLoading.visibility = View.GONE
+            loginButton.visibility = View.GONE
+        }
     }
 
     private fun errorSettingsView() {
-        binding.spinningLoading.visibility = View.GONE
-        binding.loginButton.visibility = View.VISIBLE
-
+        with(binding) {
+            spinningLoading.visibility = View.GONE
+            loginButton.visibility = View.VISIBLE
+        }
     }
 }
