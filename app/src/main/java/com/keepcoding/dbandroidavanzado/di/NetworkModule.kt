@@ -5,6 +5,7 @@ import com.keepcoding.dbandroidavanzado.data.Network.networkapi.DetailApi
 import com.keepcoding.dbandroidavanzado.data.Network.networkapi.HerosApi
 import com.keepcoding.dbandroidavanzado.data.Network.networkapi.LoginApi
 import com.keepcoding.dbandroidavanzado.auth.CredentialsProvider
+import com.keepcoding.dbandroidavanzado.data.Network.networkapi.FavoriteApi
 import com.keepcoding.dbandroidavanzado.data.Network.networkapi.LocationApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -140,5 +141,10 @@ object NetworkModule {
     @Provides
     fun provideLocation(@BearerRetrofit retrofit: Retrofit): LocationApi {
         return retrofit.create(LocationApi::class.java)
+    }
+
+    @Provides
+    fun provideFavorite(@BearerRetrofit retrofit: Retrofit): FavoriteApi {
+        return retrofit.create(FavoriteApi::class.java)
     }
 }

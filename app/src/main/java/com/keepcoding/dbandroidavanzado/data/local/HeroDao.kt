@@ -15,5 +15,11 @@ interface HeroDao {
     @Insert
     suspend fun insertAll(heros: List<HeroModelLocal>)
 
+    @Query("SELECT favorite FROM heros WHERE id = :heroId")
+    suspend fun getFavoriteStatus(heroId: String): Boolean
+
+    @Query("UPDATE heros SET favorite = :isFavorite WHERE id = :heroId")
+    suspend fun updateFavorite(heroId: String, isFavorite: Boolean)
+
 
 }

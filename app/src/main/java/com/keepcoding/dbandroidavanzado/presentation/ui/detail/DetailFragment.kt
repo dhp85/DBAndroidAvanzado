@@ -1,9 +1,11 @@
 package com.keepcoding.dbandroidavanzado.presentation.ui.detail
 
 
+import android.content.Context
 import android.os.Bundle
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -31,6 +33,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
        viewModel.getHero(args.heroName)
         viewModel.getLocations(args.idHero)
+        isFavorite()
 
         viewModel.hero.observe(viewLifecycleOwner, Observer { hero ->
             for (item in hero) {
@@ -38,6 +41,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 binding.heroImageDetail.load(item.photo)
                 binding.tvDetail.text = item.name
                 binding.tvDescription.text = item.description
+                if (item.favorite) {
+                    binding.buttonFavorite.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.red)
+                }else{
+                    binding.buttonFavorite.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.grey)
+                }
 
             }
             viewModel.locations.observe(viewLifecycleOwner, Observer { locations ->
@@ -58,6 +66,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                 }
             }
+        }
+    }
+
+    private fun isFavorite(){
+        binding.buttonFavorite.setOnClickListener {
+            viewModel.isFavorite(args.idHero)
         }
     }
 

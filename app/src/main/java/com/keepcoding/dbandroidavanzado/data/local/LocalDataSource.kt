@@ -22,4 +22,13 @@ class LocalDataSource @Inject constructor(
 
     }
 
+    suspend fun updateFavorite(id: String, isFavorite: Boolean) {
+        dao.updateFavorite(id, isFavorite)
+    }
+
+    suspend fun getFavoriteStatus(id: String): Boolean {
+        return dao.getFavoriteStatus(id)
+
+    }
+
 }

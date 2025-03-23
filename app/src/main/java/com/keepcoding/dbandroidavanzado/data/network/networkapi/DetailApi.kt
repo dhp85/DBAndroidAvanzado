@@ -9,4 +9,5 @@ interface DetailApi {
 
     @POST("api/heros/all")
     suspend  fun getHero(@Body request: GetHerosRequest): List<HeroModelDto>
+
 }
