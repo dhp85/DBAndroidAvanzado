@@ -6,12 +6,14 @@ import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
 import com.keepcoding.dbandroidavanzado.data.repository.RepositoryHeros
 import com.keepcoding.dbandroidavanzado.data.generators.getHerosLocal
 import com.keepcoding.dbandroidavanzado.data.generators.getHerosMock
+import io.mockk.clearMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -34,7 +36,7 @@ class RepositoryHerosTest {
     }
 
     @Test
-    fun `Given filled local database When getHeros Then has success results`() = runBlocking {
+    fun given_filled_local_database_When_getHeros_Then_has_success_results() = runBlocking {
 
 
         coEvery { localdata.getAllHeros() } returns getHerosLocal()
@@ -50,7 +52,7 @@ class RepositoryHerosTest {
     }
 
     @Test
-    fun `Given empty local database When getHeros Then makes remote call and fills local database`() =
+    fun given_empty_local_database_When_getHeros_Then_makes_remote_call_and_fills_local_database() =
         runBlocking {
 
             coEvery { localdata.getAllHeros() } returns emptyList()
@@ -71,4 +73,9 @@ class RepositoryHerosTest {
             Truth.assertThat(result).containsExactlyElementsIn(remoteHeros)
             Assert.assertTrue(result.size == remoteHeros.size)
         }
+
+    @After
+    fun tearDown() {
+        clearMocks(localdata, network)
+    }
 }

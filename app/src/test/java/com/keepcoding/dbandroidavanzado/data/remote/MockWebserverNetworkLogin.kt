@@ -53,7 +53,7 @@ class MockWebserverNetworkLogin {
     }
 
     @Test
-    fun `Test return token in call Api`() = runBlocking {
+    fun test_return_token_in_call_Api () = runBlocking {
 
         dispacher.forceError = false
         val user = credentialsProvider.username
@@ -66,7 +66,7 @@ class MockWebserverNetworkLogin {
     }
 
     @Test(expected = Exception::class)
-    fun `Test return error in call Api`() = runBlocking {
+    fun test_return_error_in_call_Api() = runBlocking {
         // Configurar el dispacher para que devuelva un error
         dispacher.forceError = true
         val user = credentialsProvider.username

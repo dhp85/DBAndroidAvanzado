@@ -53,7 +53,7 @@ class MockWebserverNetworkHeros {
     }
 
     @Test
-    fun`test return all heros in call Api`() = runBlocking {
+    fun test_return_all_heros_in_call_Api() = runBlocking {
 
         dispacher.forceError = false
 
@@ -68,8 +68,8 @@ class MockWebserverNetworkHeros {
     }
 
     @Test(expected = Exception::class)
-    fun `Test return error in call Api`() = runBlocking {
-        // Configurar el dispacher para que devuelva un error
+    fun test_return_error_in_call_Api() = runBlocking {
+
         dispacher.forceError = true
 
         // Llamar a la función que queremos probar
