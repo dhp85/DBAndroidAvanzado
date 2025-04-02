@@ -1,6 +1,5 @@
 package com.keepcoding.dbandroidavanzado.data.repository
 
-import android.content.Context
 import android.util.Log
 import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkHeros
 import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
@@ -12,9 +11,6 @@ class RepositoryHeros @Inject constructor(
     private val localDataHeros: LocalDataSource) {
 
 
-    fun init(context: Context) {
-        localDataHeros.init(context)
-    }
     suspend fun getHeros(): List<HeroModelDto> {
         val localHeros = localDataHeros.getAllHeros()
 

@@ -1,11 +1,8 @@
 package com.keepcoding.dbandroidavanzado.data.repository
 
-import android.content.Context
 import android.util.Log
 import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkFavorite
-import com.keepcoding.dbandroidavanzado.data.Network.base.NetworkHeros
 import com.keepcoding.dbandroidavanzado.data.local.LocalDataSource
-import com.keepcoding.dbandroidavanzado.domain.entities.HeroModelDto
 import javax.inject.Inject
 
 class RepositoryFavorite @Inject constructor(
@@ -13,11 +10,6 @@ class RepositoryFavorite @Inject constructor(
     private val localDataHeros: LocalDataSource) {
 
 
-
-        fun init(context: Context) {
-            localDataHeros.init(context)
-
-        }
 
     suspend fun toggleFavorite(id: String) = runCatching {
        val toggle = networkFavorite.getFavorite(id).onSuccess { response ->

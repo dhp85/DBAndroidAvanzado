@@ -33,8 +33,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        viewModel.init(requireContext())
-
         val adapter = HomeAdapter {
             val action =
                 HomeFragmentDirections.actionNavigationHomeToNavigationDetail(it.name, it.id)
@@ -44,7 +42,7 @@ class HomeFragment : Fragment() {
         binding.heroList.adapter = adapter
         viewModel.getSuperHeros()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
 
             viewModel.state.collect { state ->
                 when (state) {
@@ -65,7 +63,9 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.clearViewModel()
         _binding = null
+
     }
 
     private fun loadingSettingsView() {
